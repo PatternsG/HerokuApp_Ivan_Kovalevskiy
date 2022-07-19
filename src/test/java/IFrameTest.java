@@ -1,25 +1,11 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class IFrameTest {
-
-    WebDriver driver;
-
-    @BeforeClass
-    public void setup(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-    }
+public class IFrameTest extends BaseTest {
 
     @BeforeMethod
     public void herokuApp() {
@@ -27,12 +13,12 @@ public class IFrameTest {
     }
 
     @AfterMethod
-    public void quit(){
+    public void quit() {
         driver.quit();
     }
 
     @Test
-    public void iFramePositiveTest(){
+    public void iFramePositiveTest() {
         driver.switchTo().frame("mce_0_ifr");
         WebElement text = driver.findElement(By.cssSelector("#tinymce"));
         Assert.assertEquals(text.getText(), "Your content goes here.");
